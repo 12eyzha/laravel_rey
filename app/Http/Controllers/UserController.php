@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class UserController extends Controller
 {
@@ -24,14 +26,16 @@ class UserController extends Controller
             'password' => 'required',
         ]);
 
-        \App\Models\User::create([
-            'name' => $validated['name'],
-            'email' => $validated['email'],
-            'phone' => $validated['phone'],
-            'password' => bcrypt($validated['password']),
-        ]);
+        echo "<script>alert('" . $request['name'] . "');</script>";
 
-        return redirect()->route('users.index')->with('success', 'User created successfully.');
+        // \App\Models\User::create([
+        //     'name' => $validated['name'],
+        //     'email' => $validated['email'],
+        //     'phone' => $validated['phone'],
+        //     'password' => bcrypt($validated['password']),
+        // ]);
+
+        // return redirect()->route('users.index')->with('success', 'User created successfully.');
     }
     public function edit($id)
     {
@@ -60,8 +64,10 @@ class UserController extends Controller
 
         return redirect()->route('users.index')->with('success', 'User deleted successfully.');
     }
-
-
-
-
+    public function show()
+    {
+        $users = \App\Models\User::all();
+        $pdf = Pdf::loadView('users.pdf', compact('users'));
+        return $pdf->stream('users.pdf');
+    }
 }
