@@ -26,16 +26,16 @@ class UserController extends Controller
             'password' => 'required',
         ]);
 
-        echo "<script>alert('" . $request['name'] . "');</script>";
+        // echo "<script>alert('" . $request['name'] . "');</script>";
 
-        // \App\Models\User::create([
-        //     'name' => $validated['name'],
-        //     'email' => $validated['email'],
-        //     'phone' => $validated['phone'],
-        //     'password' => bcrypt($validated['password']),
-        // ]);
+        \App\Models\User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'phone' => $validated['phone'],
+            'password' => bcrypt($validated['password']),
+        ]);
 
-        // return redirect()->route('users.index')->with('success', 'User created successfully.');
+        return redirect()->route('users.index')->with('success', 'User created successfully.');
     }
     public function edit($id)
     {

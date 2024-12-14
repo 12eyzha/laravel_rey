@@ -6,6 +6,10 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    public function down(): void
+    {
+        Schema::dropIfExists('users');
+    }
     /**
      * Run the migrations.
      */
@@ -24,8 +28,5 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down(): void
-    {
-        Schema::dropIfExists('users');
-    }
+    
 };

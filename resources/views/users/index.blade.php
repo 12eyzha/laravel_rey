@@ -30,4 +30,5 @@
         @endforeach
     </tbody>
 </table>
+<a href="/users/show">Cetak PDF</a>
 @endsection
